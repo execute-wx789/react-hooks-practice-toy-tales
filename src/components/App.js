@@ -6,6 +6,7 @@ import ToyContainer from "./ToyContainer";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
+  const [toyRefresh, pushRefresh] = useState(true)
 
   function handleClick() {
     setShowForm((showForm) => !showForm);
@@ -14,11 +15,11 @@ function App() {
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm toyRefresh={toyRefresh} pushRefresh={pushRefresh}/> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer />
+      <ToyContainer toyRefresh={toyRefresh} pushRefresh={pushRefresh}/>
     </>
   );
 }

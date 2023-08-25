@@ -1,9 +1,15 @@
 import React from "react";
 
-function ToyForm() {
+function ToyForm({toyRefresh,pushRefresh}) {
+  function createToy(e) {
+    e.preventDefault()
+    const toyHold = {name:e.target[0].value, image:e.target[1].value, likes:0}
+    fetch("http://localhost:3001/toys",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(toyHold)})
+    .then(()=>pushRefresh(!toyRefresh))
+  }
   return (
     <div className="container">
-      <form className="add-toy-form">
+      <form className="add-toy-form" onSubmit={createToy}>
         <h3>Create a toy!</h3>
         <input
           type="text"
